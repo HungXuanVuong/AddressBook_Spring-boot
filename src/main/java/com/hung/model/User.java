@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class User extends AbstractPersistable<Long>{
 
 	private static final long serialVersionUID = -2675926915725853439L;
+	private transient Long id;
 	private String userId;
 	private String userName;
 	private String password;
@@ -28,6 +29,13 @@ public class User extends AbstractPersistable<Long>{
 	private Set<Address> addresses;
 	public String getUserId() {
 		return userId;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;

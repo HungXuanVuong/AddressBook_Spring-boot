@@ -23,26 +23,24 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public List<Address> addressList() {
-		// TODO Auto-generated method stub
 		return addressRepository.findAll();
 	}
 
 	@Override
 	public Address addAddress(Address address) {
-		address.setUser(userRepository.findOne(address.getUserId()));
+		address.setUser(userRepository.findOne(address.getUser().getId()));
 		return addressRepository.save(address);
 	}
 
 	@Override
 	public Address findOne(Long id) {
-		// TODO Auto-generated method stub
 		return addressRepository.findOne(id);
 	}
 
 	@Override
 	public String deleteAddress(Long id) {
 		addressRepository.delete(id);
-		return "'Message':'Deleted successfully !!!'";
+		return "Deleted successfully !!!";
 	}
 	
 	

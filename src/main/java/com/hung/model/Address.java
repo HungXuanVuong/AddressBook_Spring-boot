@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Address extends AbstractPersistable<Long>{
 
 	private static final long serialVersionUID = 3482763027684351298L;
-
+	private transient Long id;
 	private String city;
 	private String state;
 	private String country;
@@ -23,6 +23,12 @@ public class Address extends AbstractPersistable<Long>{
 	@JoinColumn(name="user")
 	private User user;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getCity() {
 		return city;
 	}

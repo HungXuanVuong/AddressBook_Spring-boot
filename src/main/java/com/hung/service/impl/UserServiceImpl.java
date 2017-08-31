@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hung.model.Role;
 import com.hung.model.User;
+import com.hung.repository.RoleRepository;
 import com.hung.repository.UserRepository;
 import com.hung.service.UserService;
 
@@ -14,30 +16,33 @@ public class UserServiceImpl implements UserService {
 
 	
 	private UserRepository userRepository;
+	private RoleRepository roleRepository;
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
 		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
 	}
 	@Override
 	public List<User> userList() {
-		// TODO Auto-generated method stub
 		return userRepository.findAll();
 	}
 	@Override
 	public User findOne(Long id) {
-		// TODO Auto-generated method stub
 		return userRepository.findOne(id);
 	}
 	@Override
 	public User addUser(User user) {
-		// TODO Auto-generated method stub
+		user.setRole(roleRepository.findOne(user.getRole().getId()));
 		return userRepository.save(user);
 	}
 	@Override
 	public String deleteUser(Long id) {
-		// TODO Auto-generated method stub
 		userRepository.delete(id);
-		return "{'message':'User deleted successfully.'}";
+		return "User deleted successfully !!!";
+	}
+	@Override
+	public List<Role> roleList() {
+		return roleRepository.findAll();
 	}
 
 	
