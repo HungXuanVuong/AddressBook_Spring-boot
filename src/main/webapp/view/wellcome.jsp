@@ -8,7 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Wellcome</title>
 </head>
-<body>${message} hihi!!
+
+<body>
+<c:if test="${pageContext.request.userPrincipal.name != null}">
+	<form action="${path}/logout" method="POST" id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+	</form>
+</c:if>
+<p>Wellcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></p>
+<p>${message} hihi!!</p>
 <p><a href="${path}/user/list">User List</a></p>
 <p><a href="${path}/user/form">Add User</a></p>
 <p><a href="${path}/address/list">Address List</a></p>

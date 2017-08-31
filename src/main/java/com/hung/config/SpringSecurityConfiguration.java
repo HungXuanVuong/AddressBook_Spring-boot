@@ -13,31 +13,21 @@ import com.hung.service.impl.MyUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
-public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private AuthenticationEntryPoint entryPoint;
-	
-	@Autowired
 	private MyUserDetailsService userDetailsService;
-//	@Autowired
-//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-//		auth.inMemoryAuthentication().withUser("1").password("1").roles("USER");
-//	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
 	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated().and().httpBasic()
-		.authenticationEntryPoint(entryPoint);
+		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/user/login").permitAll()
+				.and().logout().permitAll();
 	}
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
-//	}
-	
+
 }

@@ -25,6 +25,17 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	@GetMapping("/login")
+	public String login(Model model, String error, String logout){
+		if(error != null){
+			model.addAttribute("error", "Your username or password is Invalid ");
+		}
+		if(logout != null){
+			model.addAttribute("message", "You have been logged out successfully !!!");
+		}
+		return "login";
+	}
+	
 	@GetMapping("/list")
 	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	public String userList(Model model){
