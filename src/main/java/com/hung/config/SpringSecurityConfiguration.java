@@ -29,12 +29,15 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/user/login").permitAll()
-				.and().logout().permitAll();
+		http.authorizeRequests().antMatchers("/webjars/**").permitAll()
+			.anyRequest().authenticated().and()
+			.formLogin().loginPage("/user/login").permitAll().and()
+			.logout().deleteCookies("remember-me").permitAll().and()
+			.rememberMe().tokenValiditySeconds(180);
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 }

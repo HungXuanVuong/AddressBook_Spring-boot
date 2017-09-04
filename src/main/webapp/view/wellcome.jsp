@@ -15,7 +15,7 @@
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 	</form>
 </c:if>
-<p>Wellcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></p>
+<p>Wellcome ${pageContext.request.userPrincipal.name} | <a href="javascript:void(0);" onclick="document.forms['logoutForm'].submit()">Logout</a></p>
 <p>${message} hihi!!</p>
 <p><a href="${path}/user/list">User List</a></p>
 <p><a href="${path}/user/form">Add User</a></p>
