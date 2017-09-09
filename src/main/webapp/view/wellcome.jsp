@@ -13,32 +13,6 @@
 	src="${path}/webjars/jquery/3.2.0/jquery.min.js"></script>
 <script type="text/javascript" src="${path}/jquery.boot.js"></script>
 
-<script type="text/javascript">
-		
-/*  		$(function() {
-			$("#userList").click(function() {
-				//fetchList("user");
-				
-				
-			});
-			$("#addressList").click(function() {
-				fetchList("address");
-				
-			});
-		});
-
-		function fetchList(type){
-			$ajax.({
-				type: "GET",
-				url: "/springboot/"+type+"/list",
-				success: function(data){
-					$(".panel-body").html(data);
-				}
-				
-			});
-		} */ 
-		//alert(1);
-		</script>
 </head>
 <style>
 .row {

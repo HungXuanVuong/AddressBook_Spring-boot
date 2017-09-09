@@ -6,8 +6,13 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<strong> <span class="glyphicon glyphicon-user"></span> User List
+		<strong> <span class="glyphicon glyphicon-list"></span> User
+			List
 		</strong>
+		<div class="pull-right">
+			<a href="javascript:void(0);" onclick="addForm('user')"><span
+				class="glyphicon glyphicon-plus-sign"></span> New User</a>
+		</div>
 	</div>
 
 	<div class="panel-body">
@@ -30,7 +35,7 @@
 						<td>${user.userName}</td>
 						<td>${user.password}</td>
 						<td>${user.role.name}</td>
-						<td><a href="${path}/user/edit/${user.id}"><span
+						<td><a href="javascript:void(0);" onclick="editForm('user', ${user.id})"><span
 								class="glyphicon glyphicon-edit"></span></a></td>
 						<td><a href="${path}/user/delete/${user.id}"><span
 								class="glyphicon glyphicon-trash"></span></a></td>
