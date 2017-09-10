@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<script type="text/javascript" src="${path}/js/jquery.boot.js"></script>
+<script type="text/javascript" src="${path }/js/jquery.save.js"></script>
 
 <div class="panel panel-default">
 	<div class="panel panel-heading">
@@ -10,8 +12,8 @@
 			New Address
 		</strong>
 	</div>
-	<form:form method="post" class="form-horizontal"
-		action="${path}/address/add" commandName="addressForm">
+<form:form method="post" class="form-horizontal"
+		action="${path}/address/add" commandName="addressForm" id="submitAddressForm">
 		<form:hidden path="id" />
 		<div class="panel panel-body">
 			<div class="form-group">
@@ -31,7 +33,7 @@
 				</div>
 				<label class="col-md-2 control-label">User :</label>
 				<div class="col-md-4">
-					<form:select path="user.id" class="form-control">
+					<form:select path="userId" class="form-control">
 						<c:forEach items="${users}" var="user">
 							<form:option value="${user.id}">${user.userName}</form:option>
 						</c:forEach>
@@ -40,7 +42,7 @@
 			</div>
 
 		</div>
-		<div class="panel panel-footer">
+		<div class="panel-footer">
 			<form:button value="Save" class="btn btn-xs btn-default">
 				<span class="glyphicon glyphicon-floppy-disk"></span>Save
 				</form:button>

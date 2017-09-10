@@ -16,9 +16,12 @@ public class User extends AbstractPersistable<Long>{
 
 	private static final long serialVersionUID = -2675926915725853439L;
 	private transient Long id;
+	private String fullName;
 	private String userId;
 	private String userName;
 	private String password;
+	
+	private transient Long roleId;
 	
 	@ManyToOne
 	@JoinColumn(name="role_id")
@@ -31,6 +34,14 @@ public class User extends AbstractPersistable<Long>{
 		return userId;
 	}
 	
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -58,5 +69,14 @@ public class User extends AbstractPersistable<Long>{
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+	
 	
 }

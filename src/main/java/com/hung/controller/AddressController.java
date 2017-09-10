@@ -1,15 +1,16 @@
 package com.hung.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hung.model.Address;
 import com.hung.service.AddressService;
@@ -33,24 +34,16 @@ public class AddressController {
 		return addressService.findOne(id);
 	}
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String deleteAddress(@PathVariable Long id, Model model){
-		model.addAttribute("message",addressService.deleteAddress(id));
-		return "message";
+	public @ResponseBody String deleteAddress(@PathVariable Long id){
+		return addressService.deleteAddress(id);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String addAddress(@ModelAttribute Address address, Model model){
-		String message="";
-		if(address.getId()==null){
-			message=" added";
-		}else{
-			message=" updated";
-		}
-		model.addAttribute("message", addressService.addAddress(address).getUser().getUserName() + message +" successfully!!!");
-		return "message";
+	public @ResponseBody String addAddress(@RequestBody Address address){
+		return addressService.addAddress(address);
 	}
 	
 	@GetMapping("/edit/{id}")

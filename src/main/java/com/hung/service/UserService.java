@@ -11,7 +11,7 @@ public interface UserService {
 	
 	User findOne(Long id);
 	
-	User addUser(User user);
+	String addUser(User user);
 	
 	String deleteUser(Long id);
 	

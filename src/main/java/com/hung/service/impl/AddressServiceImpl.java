@@ -10,6 +10,9 @@ import com.hung.repository.AddressRepository;
 import com.hung.repository.UserRepository;
 import com.hung.service.AddressService;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 @Service
 public class AddressServiceImpl implements AddressService{
 
@@ -27,9 +30,22 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	@Override
-	public Address addAddress(Address address) {
-		address.setUser(userRepository.findOne(address.getUser().getId()));
-		return addressRepository.save(address);
+	public String addAddress(Address address) {
+		String message="";
+		JSONObject jsonObject = new JSONObject();
+		try {
+			if(address.getId()==null){
+				message=" added";
+			}else{
+				message=" updated";
+			}
+			address.setUser(userRepository.findOne(address.getUserId()));
+			jsonObject.put("message", addressRepository.save(address).getCountry() + message + "successfully.");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonObject.toString();
 	}
 
 	@Override
@@ -39,8 +55,14 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public String deleteAddress(Long id) {
-		addressRepository.delete(id);
-		return "Deleted successfully !!!";
+		JSONObject jsonObject = new JSONObject();
+		try {
+			addressRepository.delete(id);
+			jsonObject.put("message", "Address deleted successfully !!!");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jsonObject.toString();
 	}
 	
 	

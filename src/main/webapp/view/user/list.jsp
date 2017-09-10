@@ -20,6 +20,7 @@
 			class="table table-bordered table-condensed table-hover table-striped">
 			<thead>
 				<tr>
+					<th>Full Name</th>
 					<th>User Id</th>
 					<th>User name</th>
 					<th>Password</th>
@@ -31,13 +32,16 @@
 			<tbody>
 				<c:forEach items="${users}" var="user">
 					<tr>
+						<td>${user.fullName}</td>
 						<td>${user.userId}</td>
 						<td>${user.userName}</td>
 						<td>${user.password}</td>
 						<td>${user.role.name}</td>
-						<td><a href="javascript:void(0);" onclick="editForm('user', ${user.id})"><span
+						<td><a href="javascript:void(0);"
+							onclick="editForm('user', '${user.id}')"><span
 								class="glyphicon glyphicon-edit"></span></a></td>
-						<td><a href="${path}/user/delete/${user.id}"><span
+						<td><a href="javascript:void(0);"
+							onclick="deleteData('user', '${user.id}')"><span
 								class="glyphicon glyphicon-trash"></span></a></td>
 					</tr>
 				</c:forEach>

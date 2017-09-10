@@ -15,6 +15,7 @@ public class Address extends AbstractPersistable<Long>{
 	private String state;
 	private String country;
 	
+	
 	//create stransient field for userId
 	private transient Long userId;
 	
